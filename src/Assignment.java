@@ -1,16 +1,25 @@
 import java.util.Random; 
+import java.util.Scanner;
  
 public class Assignment 
 {
      public static void main(String[] args) 
      {
-        int playerMoney = 5;
+        Scanner in = new Scanner(System.in);
+
+        String answer1 = "";
+        System.out.println("How much money you want to spend? ");
+        answer1 = in.nextLine();
+
+        int playerMoney = Integer.parseInt(answer1);
         Random random = new Random();
+
+        String answer2 = "Yes";
         
-        while(playerMoney > 0)
+        do
         {
-            playerMoney--;
             System.out.println("Your money " + playerMoney);
+            playerMoney--;
 
             int randomNumber1;
             randomNumber1 = random.nextInt(10) + 1; 
@@ -41,19 +50,19 @@ public class Assignment
 
             if (numbersOfSeven == 1)
             {
-                System.out.println("You won 3€");
+                System.out.println("You won 3 euros");
                 playerMoney = playerMoney + 3;
             }
 
             else if (numbersOfSeven == 2)
             {
-                System.out.println("You won 5€");
+                System.out.println("You won 5 euros");
                 playerMoney = playerMoney + 5;
             }
 
             else if (numbersOfSeven == 3)
             {
-                System.out.println("You won 10€");
+                System.out.println("You won 10 euros");
                 playerMoney = playerMoney + 10;
             }
 
@@ -61,8 +70,24 @@ public class Assignment
             {
                 System.out.println("You lost.");
             }
-        }
 
-        System.out.println("End of the game. You are out of money ");
+            System.out.println("Do you want to play one more round? Yes/No ");
+            answer2 = in.nextLine();
+
+            if (answer2.equalsIgnoreCase("No"))
+            {
+                System.out.println("Thanks for playing!");
+                break;
+            }
+            else if (!answer2.equalsIgnoreCase("Yes"))
+            {
+                System.out.println("Invalid input. Assuming you want to end the game.");
+                break;
+            }
+        } while (playerMoney > 0);
+
+        System.out.println("End of the game. You have " + playerMoney + " euros left");
+        
+        in.close();
     }
 }
